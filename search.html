@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search video</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s ease;
+            position: relative;
+            color: #fff;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: -webkit-linear-gradient(45deg, #00b09b, #96c93d);
+            -webkit-background-clip: text;
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #00b09b, 0 0 10px #00b09b, 0 0 15px #96c93d;
+            }
+            50% {
+                text-shadow: 0 0 20px #00b09b, 0 0 30px #00b09b, 0 0 40px #96c93d;
+            }
+            100% {
+                text-shadow: 0 0 5px #00b09b, 0 0 10px #00b09b, 0 0 15px #96c93d;
+            }
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-box:focus {
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.7);
+            transform: scale(1.05);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+        }
+
+        .search-button:focus {
+            outline: none;
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .search-box::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .search-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .error-message {
+            color: #ff5e62;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Autocomplete List */
+        .autocomplete-list {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 8px;
+            z-index: 10;
+            display: none;
+        }
+
+        .autocomplete-list li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .autocomplete-list li:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* Responsive tasarım */
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            .search-button {
+                padding: 12px;
+                right: 10px;
+            }
+
+            .search-box {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sol Üst Köşedeki Logo -->
+<div class="logo">mytextdio</div>
+
+<div class="search-container">
+    <input type="text" class="search-box" id="search" placeholder="Video ara..." oninput="showSuggestions()" />
+    <button class="search-button" onclick="searchFunction()">🔍</button>
+    <!-- Autocomplete listesi -->
+    <ul id="suggestions-list" class="autocomplete-list"></ul>
+</div>
+
+<div class="error-message" id="error-message">
+    Bu video bulunamadı! Lütfen başka bir şey deneyin.
+</div>
+
+<script>
+    const searchMap = {
+        "test video": "",
+        "test video2": "",
+        "example video": "",
+        "tutorial video": "",
+        "funny video": "",
+    };
+
+    function searchFunction() {
+        var query = document.getElementById("search").value.toLowerCase().trim();
+        const errorMessage = document.getElementById("error-message");
+        if (searchMap[query]) {
+            window.location.href = searchMap[query];
+            errorMessage.style.display = "none"; // Eğer video bulunursa hata mesajı gizlenir
+        } else {
+            errorMessage.style.display = "block"; // Hata mesajını göster
+        }
+    }
+
+    function showSuggestions() {
+        var input = document.getElementById("search").value.toLowerCase();
+        var suggestionsList = document.getElementById("suggestions-list");
+        suggestionsList.innerHTML = "";
+        
+        if (input.length > 0) {
+            const suggestions = Object.keys(searchMap).filter(function (item) {
+                return item.toLowerCase().includes(input);
+            });
+
+            if (suggestions.length > 0) {
+                suggestionsList.style.display = "block";
+                suggestions.forEach(function (suggestion) {
+                    var li = document.createElement("li");
+                    li.textContent = suggestion;
+                    li.onclick = function() {
+                        document.getElementById("search").value = suggestion;
+                        suggestionsList.style.display = "none";
+                    };
+                    suggestionsList.appendChild(li);
+                });
+            } else {
+                suggestionsList.style.display = "none";
+            }
+        } else {
+            suggestionsList.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

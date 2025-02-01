@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        .button {
+            background: linear-gradient(145deg, #6a11cb, #2575fc);
+            border: none;
+            padding: 20px 40px;
+            font-size: 20px;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+            text-transform: uppercase;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(145deg, #2575fc, #6a11cb);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="button" onclick="window.location.href='search.html'">Long Video</button>
+        <button class="button" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSesq5myX42Z4J0Hx3SZIOcf_b2nBvaMlXKbE9fKWf2FOUamxw/viewform?usp=header'">Sign Up</button>
+        <button class="button" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdoe1ahjzfbALr_gCfFyTweIE9XAyGq_LAvhTXwGKjtYfeKSg/viewform?usp=header'">Add Video</button>
+        <button class="button" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSeoywhd6dEqmgG1rLpqkGGdDkQxVlEI0AvUxtdq0lmJlTOQjQ/viewform?usp=dialog'">like</button>
+    </div>
+<div class="user">
+    <button class="button" onclick="window.location.href='searchuser.html'">users</button>
+    </div>
+</body>
+</html>

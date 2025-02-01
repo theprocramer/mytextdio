@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Oynatma</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 450px;
+            border-radius: 15px;
+        }
+
+        .like-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .like-container:hover {
+            background-color: #3498db;
+            transform: scale(1.1);
+        }
+
+        .like-button {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .like-container:hover .like-button {
+            color: #fff;
+        }
+
+        .like-container span {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: -webkit-linear-gradient(45deg, #00b09b, #96c93d);
+            -webkit-background-clip: text;
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #00b09b, 0 0 10px #00b09b, 0 0 15px #96c93d;
+            }
+            50% {
+                text-shadow: 0 0 20px #00b09b, 0 0 30px #00b09b, 0 0 40px #96c93d;
+            }
+            100% {
+                text-shadow: 0 0 5px #00b09b, 0 0 10px #00b09b, 0 0 15px #96c93d;
+            }
+        }
+
+        /* Responsive Tasarım */
+        @media (max-width: 768px) {
+            .video-container video {
+                height: 300px;
+            }
+            .like-container {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sol Üst Köşedeki Logo -->
+<div class="logo">mytextdio</div>
+
+<!-- Video Oynatıcı ve Like Butonu -->
+<div class="video-container">
+    <video controls>
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<div class="like-container" onclick="openLikeForm()">
+    <span class="like-button">👍</span>
+    <span>Like this video</span>
+</div>
+
+<script>
+    function openLikeForm() {
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLSeoywhd6dEqmgG1rLpqkGGdDkQxVlEI0AvUxtdq0lmJlTOQjQ/viewform?usp=dialog", "_blank");
+    }
+</script>
+
+</body>
+</html>
+
